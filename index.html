@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
 <meta name="description" content="Pizza Hot — пиццерия на ул. Победы, 137 в Самаре. Пицца 33 см, роллы, сеты. Доставка и навынос, 10:00–22:00.">
 <meta name="color-scheme" content="dark">
 <title>Pizza Hot Самара</title>
@@ -261,6 +262,63 @@ footer{border-top:1px solid var(--line-soft);background:var(--ink-2);padding-blo
 .foot-note{font-size:12px;color:var(--steel-dim);max-width:52ch;line-height:1.6}
 .foot-note a{color:var(--steel);text-decoration:underline;text-underline-offset:3px}
 .foot-note a:hover{color:var(--ember)}
+
+/* ── Корзина: у демо нет бекенда, заказ собирается на странице ── */
+.add{
+  flex:0 0 auto;width:26px;height:26px;border-radius:50%;cursor:pointer;
+  background:transparent;border:1px solid var(--line);color:var(--steel);
+  font-family:var(--f-display);font-size:15px;line-height:1;padding:0;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:background-color .18s,border-color .18s,color .18s,transform .18s;
+}
+.add:hover{background:var(--red);border-color:var(--red);color:#fff}
+.add:active{transform:scale(.9)}
+.add.done{background:var(--ember);border-color:var(--ember);color:#2a1a00}
+
+.set-b .add{width:auto;height:auto;border-radius:2px;padding:.7em 1.5em;font-size:13px;letter-spacing:.07em;text-transform:uppercase;margin-top:.9rem}
+
+.fab{
+  position:fixed;right:clamp(.8rem,3vw,2rem);bottom:clamp(.8rem,3vw,2rem);z-index:55;
+  display:inline-flex;align-items:center;gap:.6rem;cursor:pointer;
+  font-family:var(--f-display);font-size:14px;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--red);color:#fff;border:none;border-radius:999px;padding:.9em 1.5em;
+  box-shadow:0 14px 34px -12px rgba(0,0,0,.9);
+  transition:background-color .2s,transform .18s;
+}
+.fab:hover{background:var(--red-lit)}
+.fab:active{transform:translateY(1px)}
+.fab[data-empty="1"]{background:var(--panel-2);color:var(--steel)}
+.fab b{font-variant-numeric:tabular-nums}
+
+.scrim{position:fixed;inset:0;z-index:56;background:rgba(4,7,14,.72);backdrop-filter:blur(3px)}
+.panel{
+  position:fixed;z-index:57;right:0;top:0;bottom:0;width:min(420px,100%);
+  background:var(--ink-2);border-left:1px solid var(--line);
+  display:flex;flex-direction:column;
+}
+.panel-h{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.3rem var(--pad);border-bottom:1px solid var(--line-soft)}
+.panel-h h2{font-size:1.3rem}
+.panel-x{background:none;border:none;color:var(--steel);font-size:26px;line-height:1;cursor:pointer;padding:0 .2em}
+.panel-x:hover{color:var(--cream)}
+.panel-list{flex:1;overflow-y:auto;padding:.4rem var(--pad)}
+.panel-empty{color:var(--steel-dim);font-size:14px;padding:2rem 0}
+.ci{display:flex;align-items:center;gap:.8rem;padding:.9rem 0;border-bottom:1px solid var(--line-soft)}
+.ci-n{flex:1;min-width:0}
+.ci-n b{display:block;font-weight:500;font-size:14.5px}
+.ci-n span{font-size:12.5px;color:var(--steel-dim);font-variant-numeric:tabular-nums}
+.qty{display:flex;align-items:center;gap:.15rem}
+.qty button{width:26px;height:26px;border:1px solid var(--line);background:transparent;color:var(--cream);cursor:pointer;font-size:15px;line-height:1;padding:0;border-radius:2px}
+.qty button:hover{border-color:var(--steel)}
+.qty span{min-width:2ch;text-align:center;font-family:var(--f-display);font-variant-numeric:tabular-nums}
+.ci-s{font-family:var(--f-display);font-size:1.05rem;min-width:5.5ch;text-align:right;font-variant-numeric:tabular-nums}
+.panel-f{padding:1.2rem var(--pad) 1.6rem;border-top:1px solid var(--line-soft);display:flex;flex-direction:column;gap:.9rem}
+.total{display:flex;align-items:baseline;justify-content:space-between}
+.total span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--steel-dim)}
+.total b{font-family:var(--f-display);font-size:1.9rem;color:var(--ember);font-variant-numeric:tabular-nums}
+.panel-note{font-size:12px;color:var(--steel-dim);line-height:1.55}
+@media(max-width:520px){
+  .panel{top:auto;left:0;width:100%;max-height:86vh;border-left:none;border-top:1px solid var(--line)}
+}
 </style>
 
 </head>
@@ -357,6 +415,7 @@ footer{border-top:1px solid var(--line-soft);background:var(--ink-2);padding-blo
             <p class="w">2 кг · 6 видов роллов</p>
             <p class="d">Филадельфия хот с угрём, Филадельфия классик, Калифорния хот с крабом, Калифорния с лососем запечённая, сяке унаги темпура, Филадельфия жареная темпура.</p>
             <p class="pr">3850 ₽</p>
+            <button class="add" data-n="Сет ассорти" data-p="3850">В заказ</button>
           </div>
         </article>
         <article class="set">
@@ -366,6 +425,7 @@ footer{border-top:1px solid var(--line-soft);background:var(--ink-2);padding-blo
             <p class="w">1,3 кг · 5 видов роллов</p>
             <p class="d">Филадельфия классическая, Калифорния с крабом, снэк-ролл, сливочный лосось и бонито маки.</p>
             <p class="pr">2900 ₽</p>
+            <button class="add" data-n="Для друзей" data-p="2900">В заказ</button>
           </div>
         </article>
         <article class="set">
@@ -375,6 +435,7 @@ footer{border-top:1px solid var(--line-soft);background:var(--ink-2);padding-blo
             <p class="w">1 кг · 5 видов роллов</p>
             <p class="d">Филадельфия классик, Филадельфия роял, Филадельфия лайт, Калифорния с лососем, мини-ролл с лососем.</p>
             <p class="pr">2700 ₽</p>
+            <button class="add" data-n="Сет самурай" data-p="2700">В заказ</button>
           </div>
         </article>
       </div>
@@ -466,6 +527,23 @@ footer{border-top:1px solid var(--line-soft);background:var(--ink-2);padding-blo
   </section>
 
 </main>
+
+
+<button class="fab" id="fab" data-empty="1" aria-haspopup="dialog">Корзина <b id="fabSum">пусто</b></button>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="panel" id="panel" hidden role="dialog" aria-modal="true" aria-label="Ваш заказ">
+  <div class="panel-h">
+    <h2>Ваш заказ</h2>
+    <button class="panel-x" id="panelX" aria-label="Закрыть корзину">&times;</button>
+  </div>
+  <div class="panel-list" id="cartList"></div>
+  <div class="panel-f">
+    <div class="total"><span>Итого</span><b id="cartSum">0 ₽</b></div>
+    <button class="btn btn-hot" id="checkout" style="justify-content:center">Оформить заказ</button>
+    <p class="panel-note" id="cartNote">Доставка по Кировскому району и самовывоз с Победы, 137. Приём заказов с 10:00 до 22:00.</p>
+  </div>
+</aside>
 
 <footer>
   <div class="wrap foot">
@@ -646,6 +724,7 @@ function draw(cat){
         <span class="g">${gram(g)}</span>
         <i class="lead"></i>
         <b class="pr">${rub(price)}</b>
+        <button class="add" data-n="${esc(name)}" data-p="${price}" aria-label="Добавить «${esc(name)}» в заказ">+</button>
       </div>
       ${desc ? `<p class="d">${esc(desc)}</p>` : ''}
     </article>`).join('');
@@ -659,6 +738,73 @@ tabs.addEventListener('click', e => {
 });
 
 draw(cats[0]);
+
+/* ── Корзина. Бекенда у макета нет: заказ живёт в памяти вкладки ── */
+const cart = new Map();
+const fab = document.getElementById('fab');
+const fabSum = document.getElementById('fabSum');
+const panel = document.getElementById('panel');
+const scrim = document.getElementById('scrim');
+const cartList = document.getElementById('cartList');
+const cartSum = document.getElementById('cartSum');
+const cartNote = document.getElementById('cartNote');
+const NOTE = cartNote.textContent;
+
+const total = () => [...cart.values()].reduce((s,i) => s + i.price * i.qty, 0);
+const count = () => [...cart.values()].reduce((s,i) => s + i.qty, 0);
+
+function paint(){
+  const n = count();
+  fab.dataset.empty = n ? '0' : '1';
+  fabSum.textContent = n ? `${n} · ${rub(total())}` : 'пусто';
+  cartSum.textContent = rub(total());
+  cartList.innerHTML = n ? [...cart.entries()].map(([name,i]) => `
+    <div class="ci">
+      <div class="ci-n"><b>${esc(name)}</b><span>${rub(i.price)} за шт.</span></div>
+      <div class="qty">
+        <button data-d="-1" data-n="${esc(name)}" aria-label="Убрать одну порцию">−</button>
+        <span>${i.qty}</span>
+        <button data-d="1" data-n="${esc(name)}" aria-label="Добавить ещё порцию">+</button>
+      </div>
+      <span class="ci-s">${rub(i.price * i.qty)}</span>
+    </div>`).join('')
+    : '<p class="panel-empty">Пока пусто. Добавьте что-нибудь из меню — кнопка «+» справа от цены.</p>';
+}
+
+function bump(name, price, d){
+  const item = cart.get(name) || { price, qty: 0 };
+  item.qty += d;
+  if (item.qty > 0) cart.set(name, item); else cart.delete(name);
+  paint();
+}
+
+document.addEventListener('click', e => {
+  const add = e.target.closest('.add');
+  if (add){
+    bump(add.dataset.n, +add.dataset.p, 1);
+    add.classList.add('done');
+    setTimeout(() => add.classList.remove('done'), 450);
+    return;
+  }
+  const q = e.target.closest('.qty button');
+  if (q) bump(q.dataset.n, 0, +q.dataset.d);
+});
+
+const open = on => { panel.hidden = !on; scrim.hidden = !on; if (on) document.getElementById('panelX').focus(); };
+fab.addEventListener('click', () => open(true));
+scrim.addEventListener('click', () => open(false));
+document.getElementById('panelX').addEventListener('click', () => open(false));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') open(false); });
+
+document.getElementById('checkout').addEventListener('click', () => {
+  if (!count()) { cartNote.textContent = 'Сначала добавьте что-нибудь из меню.'; return; }
+  cartNote.innerHTML = `Это демонстрационный макет — заказ никуда не уходит.
+    В готовом сайте он придёт вам в Telegram или на кассу.
+    Сейчас позвоните, пожалуйста, по номеру <a href="tel:+79397099092" style="color:var(--ember)">+7 939 709-90-92</a>:
+    <b>${count()} позиций на ${rub(total())}</b>.`;
+});
+
+paint();
 </script>
 </body>
 </html>
