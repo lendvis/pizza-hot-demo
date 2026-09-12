@@ -38,6 +38,8 @@
 }
 
 *{box-sizing:border-box}
+/* Свой display у .panel перебивал скрытие атрибутом hidden — панель висела открытой */
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{
   margin:0;
