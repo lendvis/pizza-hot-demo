@@ -292,12 +292,17 @@ footer{border-top:1px solid var(--line-soft);background:var(--ink-2);padding-blo
 .fab[data-empty="1"]{background:var(--panel-2);color:var(--steel)}
 .fab b{font-variant-numeric:tabular-nums}
 
-.scrim{position:fixed;inset:0;z-index:56;background:rgba(4,7,14,.72);backdrop-filter:blur(3px)}
+.scrim{display:none;position:fixed;inset:0;z-index:56;background:rgba(4,7,14,.72);backdrop-filter:blur(3px)}
+.scrim:not([hidden]){display:block}
+/* Закрытое состояние живёт в стиле самой панели: полагаться на общий сброс
+   [hidden] опасно — одна забытая строка, и панель висит открытой поверх сайта. */
 .panel{
+  display:none;
   position:fixed;z-index:57;right:0;top:0;bottom:0;width:min(420px,100%);
   background:var(--ink-2);border-left:1px solid var(--line);
-  display:flex;flex-direction:column;
+  flex-direction:column;
 }
+.panel:not([hidden]){display:flex}
 .panel-h{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.3rem var(--pad);border-bottom:1px solid var(--line-soft)}
 .panel-h h2{font-size:1.3rem}
 .panel-x{background:none;border:none;color:var(--steel);font-size:26px;line-height:1;cursor:pointer;padding:0 .2em}
